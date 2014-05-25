@@ -3,12 +3,24 @@ package com.flxkbr.kartham;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Array;
+import com.flxkbr.kartham.Item.ItemDuration;
+import com.flxkbr.kartham.Item.ItemEffect;
 
 public class CardRepository {
 	
 	static private ArrayList<ArrayList<String>> cards = new ArrayList<ArrayList<String>>(4);
+	static private Array<ItemEffect> itemEffects = new Array<ItemEffect>(20);
+	static private Array<ItemDuration> itemDurations = new Array<ItemDuration>(20);
 	
 	static public void init() {
+		setupCards();
+		setupItems();
+		
+		Gdx.app.log("CardRepository", "CardRepository initialized");
+	}
+	
+	static private void setupCards() {
 		ArrayList<String> names = new ArrayList<String>(80);
 		ArrayList<String> description = new ArrayList<String>(80);
 		for (int i = 0; i < 80; ++i) {
@@ -25,7 +37,7 @@ public class CardRepository {
 		names.set(20, "Water");
 		names.set(21, "Picture of Someone Dear");
 		names.set(22, "Clock");
-		names.set(23, "Strange Amulet");
+		names.set(23, "Strange Brew");
 		
 		names.set(40, "Engraved Ring");
 		names.set(41, "Foreign Book");
@@ -42,10 +54,25 @@ public class CardRepository {
 		// TODO: add descriptions;
 		
 		cards.add(description);
-		
-		Gdx.app.log("CardRepository", "CardRepository initialized");
 	}
 	
+	static private void setupItems() {
+		for (int i = 0; i < 20; ++i) {
+			itemEffects.add(null);
+			itemDurations.add(null);
+		}
+		itemEffects.set(0, ItemEffect.HEALTH);
+		itemEffects.set(1, ItemEffect.POWER);
+		itemEffects.set(2, ItemEffect.SANITY);
+		itemEffects.set(3, ItemEffect.MULTIPLE);
+		
+		itemDurations.set(0, ItemDuration.SPECIAL);
+		itemDurations.set(1, ItemDuration.FIGHT);
+		itemDurations.set(2, ItemDuration.SPECIAL);
+		itemDurations.set(3, ItemDuration.PERMANENT);
+		
+		Gdx.app.log("CardRepository", "Items Arrays set up");
+	}
 
 	static private int getRangeFromIndex(int i) {
 		if (i >= 0 && i <= 19) {
@@ -89,5 +116,17 @@ public class CardRepository {
 		if (index >= 0 && index <= 79)
 			return cards.get(1).get(index);
 		return null;
+	}
+	
+	static public ItemEffect getEffectFromIndex(int index) {
+		if (index < 20 || index > 39)
+			return null;
+		return itemEffects.get(index - 20);
+	}
+	
+	static public ItemDuration getDurationFromIndex(int index) {
+		if (index < 20 || index > 39)
+			return null;
+		return itemDurations.get(index - 20);
 	}
 }
