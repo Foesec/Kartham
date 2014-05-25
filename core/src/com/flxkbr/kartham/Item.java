@@ -49,5 +49,11 @@ public class Item extends Card {
 	void dispose() {
 		cardTex.dispose();
 	}
+	
+	@Override
+	public void setSize(int size) {
+		this.size = size;
+		sprite.setSize(size, size);
+	}
 
 }

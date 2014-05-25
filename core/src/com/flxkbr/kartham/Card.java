@@ -6,10 +6,14 @@ public abstract class Card {
 	
 	protected CardType type;
 	protected String name, description;
+	protected int size;
 	protected int index;
 	
 	
-	Card(CardType type) { this.type = type; }
+	Card(CardType type) { 
+		this.type = type; 
+		size = 128;
+	}
 	Card(String type) {
 		if (type.equalsIgnoreCase("creature")) {
 			this.type = CardType.CREATURE;
@@ -20,6 +24,7 @@ public abstract class Card {
 		} else {
 			this.type = CardType.EMERGENCE;
 		}
+		size = 128;
 	}
 	
 	public String getName() {
@@ -33,6 +38,13 @@ public abstract class Card {
 	public int getIndex() {
 		return index;
 	}
+	
+	public int getSize() {
+		return size;
+	}
+	
+	abstract public void setSize(int size);
+	
 	
 	abstract void render(SpriteBatch batch, int x, int y);
 	abstract void dispose();
