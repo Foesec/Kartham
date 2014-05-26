@@ -1,5 +1,6 @@
 package com.flxkbr.kartham;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 
 public class PlayingFieldInputProcessor implements InputProcessor {
@@ -30,7 +31,9 @@ public class PlayingFieldInputProcessor implements InputProcessor {
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		// TODO Auto-generated method stub
-		return false;
+		pf.touched(screenX, screenY, button);
+		Gdx.app.log("InputProcessor", "Click registered at: " + screenX + " " + screenY + ", " + button);
+		return true;
 	}
 
 	@Override

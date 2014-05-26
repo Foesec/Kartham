@@ -8,6 +8,8 @@ import com.badlogic.gdx.utils.Array;
 
 public class PlayingField {
 	
+	enum Phase { BEGIN, DRAWING, REACT, EXECUTE, ENDROUND }
+	
 	private Array<Card> bag = new Array<Card>();
 	private Texture bg;
 	private int bagCardSize = 128;
@@ -21,6 +23,7 @@ public class PlayingField {
 		bag.add(new Item(1));
 		
 		font = new BitmapFont(Gdx.files.internal("fonts/averia.fnt"), Gdx.files.internal("fonts/averia.png"), false);
+		font.setColor(ColorRepository.beige);
 	}
 	
 	public void render(SpriteBatch batch) {
@@ -51,6 +54,10 @@ public class PlayingField {
 			debugLog = "";
 		}
 		debugLog += str;
+	}
+	
+	public void touched(int x, int y, int button) {
+		
 	}
 
 }

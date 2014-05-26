@@ -9,9 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Kartham implements ApplicationListener {
 	private SpriteBatch batch;
-	//private Item myitem;
+
 	private PlayingField pf;
-	private BitmapFont font;
 
 	@Override
 	public void create() {
@@ -25,8 +24,6 @@ public class Kartham implements ApplicationListener {
 		
 		PlayingFieldInputProcessor input = new PlayingFieldInputProcessor(pf);
 		Gdx.input.setInputProcessor(input);
-		font = new BitmapFont(Gdx.files.internal("fonts/averia.fnt"), Gdx.files.internal("fonts/averia.png"), false);
-		font.setColor(ColorRepository.beige);
 	}
 
 	@Override
@@ -40,9 +37,6 @@ public class Kartham implements ApplicationListener {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		pf.render(batch);
-		//myitem.render(batch, 0, 0);
-		//myitem.render(batch, 128, 0);
-		font.draw(batch, "Here goes nothing", 100, 300);
 		batch.end();
 	}
 
@@ -63,7 +57,6 @@ public class Kartham implements ApplicationListener {
 		// TODO Auto-generated method stub
 		//myitem.dispose();
 		batch.dispose();
-		font.dispose();
 		pf.dispose();
 	}
 
