@@ -17,8 +17,6 @@ public class Kartham implements ApplicationListener {
 		batch = new SpriteBatch();
 		Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 		CardRepository.init();
-		//myitem = new Item(0);
-		//Gdx.app.log("Item", "Item " + myitem.getIndex() + " created: " + myitem.getName() + ", " + myitem.getDescription());
 		
 		pf = new PlayingField();
 		

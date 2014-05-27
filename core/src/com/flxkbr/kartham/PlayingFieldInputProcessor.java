@@ -1,10 +1,13 @@
 package com.flxkbr.kartham;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
 public class PlayingFieldInputProcessor implements InputProcessor {
 	PlayingField pf;
+	
+	private boolean klickDown = false;
 	
 	public PlayingFieldInputProcessor(PlayingField pf) {
 		this.pf = pf;
@@ -12,8 +15,11 @@ public class PlayingFieldInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean keyDown(int keycode) {
-		// TODO Auto-generated method stub
-		return false;
+		// debug only
+		if (keycode == Keys.ESCAPE) {
+			Gdx.app.exit();
+		}
+		return true;
 	}
 
 	@Override

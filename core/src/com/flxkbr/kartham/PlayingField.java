@@ -57,7 +57,7 @@ public class PlayingField {
 	}
 	
 	public void touched(int x, int y, int button) {
-		
+		bag.add(new Item(3));
 	}
 
 }
