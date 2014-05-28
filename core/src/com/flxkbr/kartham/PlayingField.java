@@ -200,5 +200,11 @@ public class PlayingField {
 			break;
 		}
 	}
+	
+	private Card drawCard() {
+		Card next = scenario.pop();
+		
+		return next;
+	}
 
 }

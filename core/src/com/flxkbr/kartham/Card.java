@@ -70,6 +70,10 @@ public abstract class Card {
 		return boundingRect;
 	}
 	
+	public CardType getCardType() {
+		return type;
+	}
+	
 	
 	public abstract void setSize(int size);
 	public abstract boolean contains(int x, int y);
