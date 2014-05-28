@@ -26,20 +26,24 @@ public class Item extends Card {
 		this.index = adjustedIndex;
 		this.name = CardRepository.getNameFromIndex(adjustedIndex);
 		this.description = CardRepository.getDescriptionFromIndex(adjustedIndex);
-		this.effect = CardRepository.getEffectFromIndex(index);
+		this.effect = CardRepository.getItemEffectFromIndex(index);
 		this.duration = effect.getItemDuration();
 		
 		cardTex = new Texture(Gdx.files.internal("cards/card_item.png"));
 		sprite = new Sprite(cardTex);
 	}
-
-	private Item(CardType type, int x, int y) {
-		super(type, x, y);
-	}
 	
-	private Item(String type, int x, int y) {
-		super(type, x, y);
+	Item(int index) {
+		this(index, 0, 0);
 	}
+
+//	private Item(CardType type, int x, int y) {
+//		super(type, x, y);
+//	}
+//	
+//	private Item(String type, int x, int y) {
+//		super(type, x, y);
+//	}
 
 	@Override
 	void render(SpriteBatch batch) {

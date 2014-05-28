@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
@@ -21,6 +22,9 @@ public class PlayingField {
 	private BitmapFont lFont, sFont;
 	private Sprite tooltipSprite;
 	
+	// player
+	private Player player;
+	
 	// tooltip handling
 	private boolean showTooltip = false;
 	private String tooltipMsg = "";
@@ -31,6 +35,9 @@ public class PlayingField {
 	private Array<IEffect> roundEffects = new Array<IEffect>();
 	private Array<IEffect> fightEffects = new Array<IEffect>();
 	private Array<IEffect> specialEffect = new Array<IEffect>(); // eventuell eigener Typ
+	
+	// faggotty
+	private Array<Card> scenario = new Array<Card>(15);
 	
 	private int round = 0;
 	
@@ -46,6 +53,9 @@ public class PlayingField {
 		
 		tooltipSprite = new Sprite(new Texture(Gdx.files.internal("tooltip.png")));
 		tooltipSprite.setScale(ttScale);
+		
+		player = new Player();
+		scenario = ScenarioCreator.createScenario();
 	}
 	
 	public void render(SpriteBatch batch) {
@@ -68,6 +78,13 @@ public class PlayingField {
 		default:
 			break;
 		}
+		
+		lFont.drawWrapped(batch, 
+						  "Health: " + player.getHealth() + "/" + player.getMaxhealth() + " Sanity: " + player.getSanity() + "/" + player.getMaxsanity() ,
+						  Gdx.graphics.getWidth() - 215, 
+						  80, 
+						  210,
+						  HAlignment.RIGHT);
 		
 		if (showTooltip) {
 			int mx = Gdx.input.getX();
