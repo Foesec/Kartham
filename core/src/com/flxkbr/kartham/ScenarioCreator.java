@@ -16,19 +16,23 @@ public class ScenarioCreator {
 	public static Array<Card> createScenario() {
 		Array<Card> scenario = new Array<Card>(15);
 		debug = "";
-		for (int i = 0; i<scenarioSize; ++i) {
+		for (int i = 0; i<scenarioSize/2+1; ++i) {
 			scenario.add(getRandomItem());
 			debug += scenario.get(i).getName() + ", ";
 		}
+		// careful, only works with uneven size
+		for (int i = 0; i<scenarioSize/2; ++i) {
+			scenario.add(getRandomCreature());
+		}
 		
-		//Gdx.app.log("ScenarioCreator", "Unshuffled Scenario: " + debug);
+		Gdx.app.log("ScenarioCreator", "Unshuffled Scenario: " + debug);
 		debug = "";
 		// TODO: insert other cards
 		scenario.shuffle();
 		for (Card c : scenario) {
 			debug += c.getName() + ", ";
 		}
-		//Gdx.app.log("ScenarioCreator", "Shuffled once scenario: " + debug);
+		Gdx.app.log("ScenarioCreator", "Shuffled once scenario: " + debug);
 		scenario.shuffle();
 		
 		return scenario;
@@ -39,11 +43,11 @@ public class ScenarioCreator {
 		return new Item(rand);
 	}
 	
-	/* TODO: impement methods
-	private static Creature getRandomMonster() {
-		
+	private static Creature getRandomCreature() {
+		int rand = (int)Math.round(Math.random()*3);
+		return new Creature(rand);
 	}
-	
+	/*
 	private static Artifact getRandomArtifact() {
 		
 	}

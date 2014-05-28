@@ -2,6 +2,7 @@ package com.flxkbr.kartham;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -11,6 +12,7 @@ public class Creature extends Card {
 	private Sprite sprite;
 	private CreatureStats stats;
 	private CreatureEffect effect;
+	private BitmapFont font = ColorRepository.getDkFontS();
 	
 	Creature(int index) {
 		super("creature", 0, 0);
@@ -50,8 +52,8 @@ public class Creature extends Card {
 
 	@Override
 	void render(SpriteBatch batch) {
-		// TODO Auto-generated method stub
-		
+		sprite.draw(batch);
+		font.drawWrapped(batch, name, x+10, y+44, 128);
 	}
 
 	@Override

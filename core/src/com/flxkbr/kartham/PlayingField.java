@@ -2,6 +2,8 @@ package com.flxkbr.kartham;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
@@ -20,12 +22,18 @@ public class PlayingField {
 	private int bagCardSize = 128;
 	private String debugLog = "";
 	private BitmapFont lFont, sFont;
-	private Sprite tooltipSprite;
+	private BitmapFont ltFontL = ColorRepository.getLtFontL();
+	
+	// textover
+	private Pixmap backdrop = new Pixmap(300, 100, Format.RGBA8888);
+	private Texture tex;// = new Texture(backdrop);
+	private Sprite bdSprite; // = new Sprite(tex);
 	
 	// player
 	private Player player;
 	
 	// tooltip handling
+	private Sprite tooltipSprite;
 	private boolean showTooltip = false;
 	private String tooltipMsg = "";
 	private float ttScale = 1.5f;
@@ -44,8 +52,9 @@ public class PlayingField {
 	public PlayingField() {
 		bg = new Texture(Gdx.files.internal("background_playing.png"));
 		
-		bag.add(new Item(0, 0, 0));
+		bag.add(new Item(0, 256, 0));
 		bag.add(new Item(1, 128, 0));
+		bag.add(new Creature(0));
 		
 		lFont = ColorRepository.getLtFontL();
 		sFont = ColorRepository.getDkFontS();
@@ -56,6 +65,14 @@ public class PlayingField {
 		
 		player = new Player();
 		scenario = ScenarioCreator.createScenario();
+		
+		backdrop.setColor(ColorRepository.dkGrey);
+		backdrop.fill();
+		tex = new Texture(backdrop);
+		bdSprite = new Sprite(tex);
+		bdSprite.setOrigin(0, 0);
+		bdSprite.setPosition(200, 200);
+		
 	}
 	
 	public void render(SpriteBatch batch) {
@@ -66,6 +83,7 @@ public class PlayingField {
 		lFont.draw(batch, debugLog, 0, 300);
 		switch(phase) {
 		case INIT:
+			init(batch);
 			break;
 		case BEGIN:
 			break;
@@ -103,7 +121,8 @@ public class PlayingField {
 	}
 	
 	private void init(SpriteBatch batch)  {
-		
+		bdSprite.draw(batch);
+		ltFontL.drawWrapped(batch, "Cards are being drawn", 210, 290, 190);
 	}
 	
 	private void initTouch() {
