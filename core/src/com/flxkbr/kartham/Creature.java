@@ -14,10 +14,12 @@ public class Creature extends Card {
 	
 	Creature(int index) {
 		super("creature", 0, 0);
-		int adjustedIndex = index + 20;
+		int adjustedIndex = index; // creatures start at 0
 		this.index = adjustedIndex;
 		this.name = CardRepository.getNameFromIndex(adjustedIndex);
 		this.description = CardRepository.getDescriptionFromIndex(adjustedIndex);
+		this.stats = CardRepository.getCreatureStatFromIndex(index);
+		this.effect = CardRepository.getCreatureEffectFromIndex(index);
 		//this.effect = CardRepository.getEffectFromIndex(index);
 		//this.duration = effect.getItemDuration();
 		
@@ -36,13 +38,14 @@ public class Creature extends Card {
 	@Override
 	public void setSize(int size) {
 		// TODO Auto-generated method stub
-		
+		this.size = size;
+		sprite.setSize(size, size);
+		boundingRect.setSize(size);
 	}
 
 	@Override
 	public boolean contains(int x, int y) {
-		// TODO Auto-generated method stub
-		return false;
+		return boundingRect.contains(x, y);
 	}
 
 	@Override

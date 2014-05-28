@@ -61,6 +61,7 @@ public class Item extends Card {
 	public void setSize(int size) {
 		this.size = size;
 		sprite.setSize(size, size);
+		boundingRect.setSize(size);
 	}
 
 	@Override

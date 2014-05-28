@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
+import com.flxkbr.kartham.CreatureStats.DamageType;
 import com.flxkbr.kartham.Item.ItemDuration;
 
 public class CardRepository {
@@ -16,6 +17,7 @@ public class CardRepository {
 	static public void init() {
 		setupCards();
 		setupItems();
+		setupCreatures();
 		
 		Gdx.app.log("CardRepository", "CardRepository initialized");
 	}
@@ -27,10 +29,7 @@ public class CardRepository {
 			names.add("empty");
 			description.add("empty");
 		}
-		for (int i = 0; i < 20; ++i) {
-			creatureEffects.add(null);
-			creatureStats.add(null);
-		}
+		
 		
 		names.set(0, "Shadow");
 		names.set(1, "Crazed Man");
@@ -94,6 +93,20 @@ public class CardRepository {
 		itemEffects.set(2, ie3);
 		ItemEffect ie4 = new ItemEffect(2, 0, 0, 0, 0, 0, ItemDuration.PERMANENT);
 		itemEffects.set(3, ie4);
+	}
+	
+	static private void setupCreatures() {
+		for (int i = 0; i < 20; ++i) {
+			creatureEffects.add(null);
+			creatureStats.add(null);
+		}
+		creatureStats.set(0, new CreatureStats(1, 0.4f, 1, DamageType.UNNATURAL));
+		creatureStats.set(1, new CreatureStats(2, 0.2f, 1, DamageType.PHYSICAL));
+		creatureStats.set(2, new CreatureStats(3, 0.6f, 2, DamageType.PHYSICAL));
+		creatureStats.set(3, new CreatureStats(2, 0.5f, 2, DamageType.UNNATURAL));
+		Gdx.app.log("CardRepository", "CreatureStats filled");
+		
+		// TODO: creature effects!
 	}
 
 	static private int getRangeFromIndex(int i) {
