@@ -1,6 +1,7 @@
 package com.flxkbr.kartham;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 
 public abstract class Card {
 	
@@ -8,13 +9,18 @@ public abstract class Card {
 	protected String name, description;
 	protected int size;
 	protected int index;
+	protected int x, y;
+	protected Rectangle boundingRect;
 	
 	
-	Card(CardType type) { 
+	Card(CardType type, int x, int y) { 
 		this.type = type; 
+		this.x = x;
+		this.y = y;
 		size = 128;
+		boundingRect = new Rectangle(x, y, size, size);
 	}
-	Card(String type) {
+	Card(String type, int x, int y) {
 		if (type.equalsIgnoreCase("creature")) {
 			this.type = CardType.CREATURE;
 		} else if (type.equalsIgnoreCase("item")) {
@@ -24,7 +30,10 @@ public abstract class Card {
 		} else {
 			this.type = CardType.EMERGENCE;
 		}
+		this.x = x;
+		this.y = y;
 		size = 128;
+		boundingRect = new Rectangle(x, y, size, size);
 	}
 	
 	public String getName() {
@@ -43,10 +52,30 @@ public abstract class Card {
 		return size;
 	}
 	
-	abstract public void setSize(int size);
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
+	public void setPosition(int x, int y) {
+		this.x = x;
+		this.y = y;
+		boundingRect.set(x, y, size, size);
+	}
+	
+	public Rectangle getRect() {
+		return boundingRect;
+	}
 	
 	
-	abstract void render(SpriteBatch batch, int x, int y);
+	public abstract void setSize(int size);
+	public abstract boolean contains(int x, int y);
+	
+	abstract void render(SpriteBatch batch);
+	
 	abstract void dispose();
 	
 

@@ -2,17 +2,15 @@ package com.flxkbr.kartham;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Item extends Card {
 	
-	enum ItemEffect{
-		HEALTH, POWER, SANITY, MULTIPLE;
-	}
-	
 	enum ItemDuration{
-		ROUND, FIGHT, PERMANENT, SPECIAL;
+		ONCE, FIGHT, PERMANENT, SPECIAL;
 	}
 	
 	private ItemEffect effect;
@@ -20,29 +18,34 @@ public class Item extends Card {
 	private Texture cardTex;
 	private Sprite sprite;
 	
-	Item(int index){
-		super("item");
-		this.index = index;
-		this.name = CardRepository.getNameFromIndex(index);
-		this.description = CardRepository.getDescriptionFromIndex(index);
+	private BitmapFont font = ColorRepository.getDkFontS();
+	
+	Item(int index, int x, int y){
+		super("item", x, y);
+		int adjustedIndex = index + 20;
+		this.index = adjustedIndex;
+		this.name = CardRepository.getNameFromIndex(adjustedIndex);
+		this.description = CardRepository.getDescriptionFromIndex(adjustedIndex);
 		this.effect = CardRepository.getEffectFromIndex(index);
-		this.duration = CardRepository.getDurationFromIndex(index);
+		this.duration = effect.getItemDuration();
+		
 		cardTex = new Texture(Gdx.files.internal("cards/card_item.png"));
 		sprite = new Sprite(cardTex);
 	}
 
-	private Item(CardType type) {
-		super(type);
+	private Item(CardType type, int x, int y) {
+		super(type, x, y);
 	}
 	
-	private Item(String type) {
-		super(type);
+	private Item(String type, int x, int y) {
+		super(type, x, y);
 	}
 
 	@Override
-	void render(SpriteBatch batch, int x, int y) {
+	void render(SpriteBatch batch) {
 		sprite.setPosition(x, y);
 		sprite.draw(batch);
+		font.drawWrapped(batch, name, x+10, y+44, 128);
 	}
 
 	@Override
@@ -54,6 +57,11 @@ public class Item extends Card {
 	public void setSize(int size) {
 		this.size = size;
 		sprite.setSize(size, size);
+	}
+
+	@Override
+	public boolean contains(int x, int y) {
+		return boundingRect.contains(x, y);
 	}
 
 }

@@ -37,7 +37,7 @@ public class PlayingFieldInputProcessor implements InputProcessor {
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		// TODO Auto-generated method stub
-		pf.touched(screenX, screenY, button);
+		pf.touched(screenX, Gdx.graphics.getHeight()-screenY, button);
 		Gdx.app.log("InputProcessor", "Click registered at: " + screenX + " " + screenY + ", " + button);
 		return true;
 	}

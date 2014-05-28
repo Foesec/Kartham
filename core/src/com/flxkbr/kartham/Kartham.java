@@ -17,6 +17,7 @@ public class Kartham implements ApplicationListener {
 		batch = new SpriteBatch();
 		Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 		CardRepository.init();
+		ColorRepository.init();
 		
 		pf = new PlayingField();
 		
@@ -52,10 +53,9 @@ public class Kartham implements ApplicationListener {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		//myitem.dispose();
-		batch.dispose();
 		pf.dispose();
+		batch.dispose();
+		ColorRepository.dispose();
 	}
 
 }
