@@ -31,6 +31,7 @@ public class Item extends Card {
 		
 		cardTex = new Texture(Gdx.files.internal("cards/card_item.png"));
 		sprite = new Sprite(cardTex);
+		sprite.setPosition(x, y);
 	}
 	
 	Item(int index) {
@@ -62,6 +63,14 @@ public class Item extends Card {
 		this.size = size;
 		sprite.setSize(size, size);
 		boundingRect.setSize(size);
+	}
+	
+	@Override
+	public void setPosition(int x, int y) {
+		this.x = x;
+		this.y = y;
+		sprite.setPosition(x, y);
+		boundingRect.set(x, y, size, size);
 	}
 
 	@Override

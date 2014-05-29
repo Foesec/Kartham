@@ -19,7 +19,7 @@ public class CardRepository {
 		setupItems();
 		setupCreatures();
 		
-		Gdx.app.log("CardRepository", "CardRepository initialized");
+		//Gdx.app.log("CardRepository", "CardRepository initialized");
 	}
 	
 	static private void setupCards() {
@@ -104,7 +104,7 @@ public class CardRepository {
 		creatureStats.set(1, new CreatureStats(2, 0.2f, 1, DamageType.PHYSICAL));
 		creatureStats.set(2, new CreatureStats(3, 0.6f, 2, DamageType.PHYSICAL));
 		creatureStats.set(3, new CreatureStats(2, 0.5f, 2, DamageType.UNNATURAL));
-		Gdx.app.log("CardRepository", "CreatureStats filled");
+		//Gdx.app.log("CardRepository", "CreatureStats filled");
 		
 		// TODO: creature effects!
 	}
@@ -173,7 +173,7 @@ public class CardRepository {
 	}
 	
 	static public void dispose() {
-		Gdx.app.log("CardRepository", "successfully disposed of");
+		//Gdx.app.log("CardRepository", "successfully disposed of");
 	}
 
 }

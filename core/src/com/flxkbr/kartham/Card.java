@@ -60,11 +60,7 @@ public abstract class Card {
 		return y;
 	}
 	
-	public void setPosition(int x, int y) {
-		this.x = x;
-		this.y = y;
-		boundingRect.set(x, y, size, size);
-	}
+	public abstract void setPosition(int x, int y);
 	
 	public Rectangle getRect() {
 		return boundingRect;

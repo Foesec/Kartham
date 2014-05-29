@@ -3,13 +3,17 @@ package com.flxkbr.kartham;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector3;
 
 public class PlayingFieldInputProcessor implements InputProcessor {
 	PlayingField pf;
 	
 	private boolean klickDown = false;
+	private OrthographicCamera camera;
 	
-	public PlayingFieldInputProcessor(PlayingField pf) {
+	public PlayingFieldInputProcessor(PlayingField pf, OrthographicCamera camera) {
+		this.camera = camera;
 		this.pf = pf;
 	}
 
@@ -36,9 +40,9 @@ public class PlayingFieldInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		pf.touched(screenX, Gdx.graphics.getHeight()-screenY, button);
-		Gdx.app.log("InputProcessor", "Click registered at: " + screenX + " " + screenY + ", " + button);
+		Vector3 touch = new Vector3(screenX, screenY, 0);
+		camera.unproject(touch);
+		pf.touched((int)touch.x, (int)touch.y, button);
 		return true;
 	}
 

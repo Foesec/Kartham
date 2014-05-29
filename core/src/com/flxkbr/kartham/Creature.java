@@ -27,6 +27,7 @@ public class Creature extends Card {
 		
 		creaTex = new Texture(Gdx.files.internal("cards/card_creature.png"));
 		sprite = new Sprite(creaTex);
+
 	}
 
 //	Creature(CardType type, int x, int y) {
@@ -43,6 +44,14 @@ public class Creature extends Card {
 		this.size = size;
 		sprite.setSize(size, size);
 		boundingRect.setSize(size);
+	}
+	
+	@Override
+	public void setPosition(int x, int y)  {
+		this.x = x;
+		this.y = y;
+		sprite.setPosition(x, y);
+		boundingRect.set(x, y, size, size);
 	}
 
 	@Override
@@ -61,5 +70,7 @@ public class Creature extends Card {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 
 }

@@ -25,14 +25,14 @@ public class ScenarioCreator {
 			scenario.add(getRandomCreature());
 		}
 		
-		Gdx.app.log("ScenarioCreator", "Unshuffled Scenario: " + debug);
+		//Gdx.app.log("ScenarioCreator", "Unshuffled Scenario: " + debug);
 		debug = "";
 		// TODO: insert other cards
 		scenario.shuffle();
 		for (Card c : scenario) {
 			debug += c.getName() + ", ";
 		}
-		Gdx.app.log("ScenarioCreator", "Shuffled once scenario: " + debug);
+		//Gdx.app.log("ScenarioCreator", "Shuffled once scenario: " + debug);
 		scenario.shuffle();
 		
 		return scenario;
