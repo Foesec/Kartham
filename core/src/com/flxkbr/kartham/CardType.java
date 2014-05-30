@@ -4,6 +4,7 @@ public enum CardType {
 	CREATURE("creature"),
 	ITEM("item"),
 	ARTIFACT("artifact"),
+	EVENT("event"),
 	EMERGENCE("emergence");
 
 	private final String type;

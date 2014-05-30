@@ -11,7 +11,7 @@ public class Player {
 	public Player() {
 		name = "Jim Morrington";
 		maxhealth = health = 10;
-		maxsanity = sanity = 10;
+		maxsanity = sanity = 8;
 		power = currentPower = 4;
 		weapon = new Weapon("Pistol", "ranged", "slow", 3);
 	}

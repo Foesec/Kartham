@@ -27,6 +27,8 @@ public abstract class Card {
 			this.type = CardType.ITEM;
 		} else if (type.equalsIgnoreCase("artifact")) {
 			this.type = CardType.ARTIFACT;
+		} else if (type.equalsIgnoreCase("event")) {
+			this.type = CardType.EVENT;
 		} else {
 			this.type = CardType.EMERGENCE;
 		}
@@ -60,8 +62,6 @@ public abstract class Card {
 		return y;
 	}
 	
-	public abstract void setPosition(int x, int y);
-	
 	public Rectangle getRect() {
 		return boundingRect;
 	}
@@ -69,6 +69,8 @@ public abstract class Card {
 	public CardType getCardType() {
 		return type;
 	}
+	
+	public abstract void setPosition(int x, int y);
 	
 	
 	public abstract void setSize(int size);

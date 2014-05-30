@@ -23,9 +23,9 @@ public class CardRepository {
 	}
 	
 	static private void setupCards() {
-		ArrayList<String> names = new ArrayList<String>(80);
-		ArrayList<String> description = new ArrayList<String>(80);
-		for (int i = 0; i < 80; ++i) {
+		ArrayList<String> names = new ArrayList<String>(100);
+		ArrayList<String> description = new ArrayList<String>(100);
+		for (int i = 0; i < 100; ++i) {
 			names.add("empty");
 			description.add("empty");
 		}
@@ -50,6 +50,11 @@ public class CardRepository {
 		names.set(61, "Drawing");
 		names.set(62, "Epiphany");
 		names.set(64, "Hysteria");
+		
+		names.set(80, "Trap");
+		names.set(81, "Flock of Hands");
+		names.set(82, "Unfortunate Villager");
+		names.set(83, "Tavern");
 		
 		cards.add(names);
 		
@@ -104,58 +109,57 @@ public class CardRepository {
 		creatureStats.set(1, new CreatureStats(2, 0.2f, 1, DamageType.PHYSICAL));
 		creatureStats.set(2, new CreatureStats(3, 0.6f, 2, DamageType.PHYSICAL));
 		creatureStats.set(3, new CreatureStats(2, 0.5f, 2, DamageType.UNNATURAL));
-		//Gdx.app.log("CardRepository", "CreatureStats filled");
 		
 		// TODO: creature effects!
 	}
 
-	static private int getRangeFromIndex(int i) {
-		if (i >= 0 && i <= 19) {
-			return 0;
-		}
-		else if (i <= 39) {
-			return 1;
-		}
-		else if (i <= 59) {
-			return 2;
-		} 
-		else if (i <= 79){
-			return 3;
-		}
-		else return -1;
-	}
+//	static private int getRangeFromIndex(int i) {
+//		if (i >= 0 && i <= 19) {
+//			return 0;
+//		}
+//		else if (i <= 39) {
+//			return 1;
+//		}
+//		else if (i <= 59) {
+//			return 2;
+//		} 
+//		else if (i <= 79){
+//			return 3;
+//		}
+//		else return -1;
+//	}
 	
-	static public CardType getTypeFromRangeIndex(int i) {
-		if (i == 0) {
-			return CardType.CREATURE;
-		}
-		else if (i == 1) {
-			return CardType.ITEM;
-		}
-		else if (i == 2) {
-			return CardType.ARTIFACT;
-		}
-		else if (i == 3) {
-			return CardType.EMERGENCE;
-		}
-		else return null;
-	}
+//	static public CardType getTypeFromRangeIndex(int i) {
+//		if (i == 0) {
+//			return CardType.CREATURE;
+//		}
+//		else if (i == 1) {
+//			return CardType.ITEM;
+//		}
+//		else if (i == 2) {
+//			return CardType.ARTIFACT;
+//		}
+//		else if (i == 3) {
+//			return CardType.EMERGENCE;
+//		}
+//		else return null;
+//	}
 	
 	static public String getNameFromIndex(int index) {
-		if (index >= 0 && index <= 79)
+		if (index >= 0 && index < 100)
 			return cards.get(0).get(index);
 		return null;
 	}
 	
 	static public String getDescriptionFromIndex(int index) {
-		if (index >= 0 && index <= 79)
+		if (index >= 0 && index < 100)
 			return cards.get(1).get(index);
 		return null;
 	}
 	
 	// index must be [0, 19]
 	static public ItemEffect getItemEffectFromIndex(int index) {
-		if (index > 19)
+		if (index > 19 || index < 0)
 			return null;
 		return itemEffects.get(index);
 	}

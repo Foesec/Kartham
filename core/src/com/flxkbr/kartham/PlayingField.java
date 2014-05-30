@@ -200,13 +200,14 @@ public class PlayingField {
 		for (Card c : bag) {
 			c.dispose();
 		}
-		Gdx.app.log("PlayingField", "PlayingField successfully disposed of");
 		
 		tooltipSprite.getTexture().dispose();
 		textoverSprite.getTexture().dispose();
 		textoverTex.dispose();
-		currentCard.dispose();
+		if (currentCard != null) currentCard.dispose();
 		cardBack.getTexture().dispose();
+		
+		Gdx.app.log("PlayingField", "PlayingField successfully disposed of");
 	}
 	
 	public void writeDebug(char c) {
