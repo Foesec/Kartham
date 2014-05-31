@@ -75,6 +75,9 @@ public abstract class Card {
 	
 	public abstract void setSize(int size);
 	public abstract boolean contains(int x, int y);
+	public boolean contains(float x, float y) {
+		return contains(Math.round(x), Math.round(y));
+	}
 	
 	abstract void render(SpriteBatch batch);
 	

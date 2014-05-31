@@ -58,6 +58,11 @@ public class Creature extends Card {
 	public boolean contains(int x, int y) {
 		return boundingRect.contains(x, y);
 	}
+	
+	@Override
+	public boolean contains(float x, float y) {
+		return boundingRect.contains(x, y);
+	}
 
 	@Override
 	void render(SpriteBatch batch) {

@@ -42,6 +42,11 @@ public class PlayingField {
 	private String tooltipMsg = "";
 	private float ttScale = 1.5f;
 	private int ttIndex = -1;
+	private boolean mouseover = false, registered = false;
+	private int currentMOIndex = -1, lastMOIndex = -1;
+	//private Card currentMouseover = null, lastMouseover = null;
+	private float mouseoverTimer = 0.0f;
+	private float ttDelay = 1.0f;
 	
 	// stacks of effects that need to be removed again
 	private Array<IEffect> roundEffects = new Array<IEffect>();
@@ -123,25 +128,57 @@ public class PlayingField {
 							"Power: " + player.getCurrentPower(),
 							dispW-430, 60, 210, HAlignment.RIGHT);
 		
+		Vector3 touch = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+		camera.unproject(touch);
+		if (currentCard != null && currentCard.contains(touch.x, touch.y)) {
+			currentMOIndex = -2;
+			tooltipMsg = currentCard.getDescription();
+		} else {
+			for (int i = 0; i<bag.size; ++i) {
+				if (bag.get(i).contains(touch.x, touch.y)) {
+					currentMOIndex = i;
+					registered = true;
+					tooltipMsg = bag.get(i).getDescription();
+				}
+			}
+			// if over no card
+			if (!registered) {
+				currentMOIndex = -1;				
+			}
+		}
+		if (currentMOIndex != -1 && currentMOIndex == lastMOIndex) {
+			mouseoverTimer += Gdx.graphics.getDeltaTime();
+			if (mouseoverTimer > ttDelay) {
+				showTooltip = true;
+			}
+		} else {
+			mouseoverTimer = 0.0f;
+			showTooltip = false;
+			tooltipMsg = "";
+		}
+		
+		lastMOIndex = currentMOIndex;
+		
+		Gdx.app.log("PlayingField", currentMOIndex + " " + lastMOIndex + " " + mouseoverTimer);
+		
 		if (showTooltip) {
-			Vector3 touch = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-			camera.unproject(touch);
 			tooltipSprite.setPosition(touch.x, touch.y);
 			tooltipSprite.draw(batch);
 			dkFontS.drawWrapped(batch, tooltipMsg, touch.x+20, touch.y+128*ttScale-20, 256*ttScale-20);
-			if (ttIndex == -2) {
+			if (currentMOIndex == -2) {
 				if (!currentCard.contains((int)touch.x, (int)touch.y)) {
 					showTooltip = false;
 					tooltipMsg = "";
-					ttIndex = -1;
+					currentMOIndex = -1;
 				}
 			}
-			else if (!bag.get(ttIndex).contains((int)touch.x,(int)touch.y)) {
+			else if (!bag.get(currentMOIndex).contains((int)touch.x,(int)touch.y)) {
 				showTooltip = false;
 				tooltipMsg = "";
-				ttIndex = -1;
+				currentMOIndex = -1;
 			}
 		}
+		currentMOIndex = -1;
 	}
 	
 	private void init(SpriteBatch batch)  {
