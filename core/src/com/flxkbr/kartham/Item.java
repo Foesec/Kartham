@@ -38,23 +38,16 @@ public class Item extends Card {
 		this(index, 0, 0);
 	}
 
-//	private Item(CardType type, int x, int y) {
-//		super(type, x, y);
-//	}
-//	
-//	private Item(String type, int x, int y) {
-//		super(type, x, y);
-//	}
 
 	@Override
-	void render(SpriteBatch batch) {
+	public void render(SpriteBatch batch) {
 		sprite.setPosition(x, y);
 		sprite.draw(batch);
 		font.drawWrapped(batch, name, x+10, y+44, 128);
 	}
 
 	@Override
-	void dispose() {
+	public void dispose() {
 		cardTex.dispose();
 	}
 	

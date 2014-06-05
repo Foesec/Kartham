@@ -29,9 +29,6 @@ public class ScenarioCreator {
 		debug = "";
 		// TODO: insert other cards
 		scenario.shuffle();
-		for (Card c : scenario) {
-			debug += c.getName() + ", ";
-		}
 		//Gdx.app.log("ScenarioCreator", "Shuffled once scenario: " + debug);
 		scenario.shuffle();
 		
